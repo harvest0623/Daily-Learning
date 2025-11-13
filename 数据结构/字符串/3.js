@@ -8,16 +8,16 @@ let str = 'yessey'
 // }
 
 function isPalindrome(s){
-    let left = 0
-    let right = str.length - 1
+    let left = 0;
+    let right = str.length - 1;
     while(left < right){
         if(str[left] !=  str[right]){
-            return false
+            return false;
         }
-        left++
-        right--
+        left++;
+        right--;
     }
-    return true
+    return true;
 }
 
-console.log(isPalindrome(str));
+console.log(str);
