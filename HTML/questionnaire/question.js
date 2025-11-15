@@ -47,7 +47,7 @@ goResult.addEventListener('click', () => {
     // 弹出得分
     // 1.遍历整个题目数据
     // 拿到每道题的答案选项，正确的选项已经在数据中标注好了
-    // 对比用输入的答案answerList 来评分
+    // 对比用输入的答案answerList来评分
     // 浏览器本地保存答案
     // localStorage.setItem('answerList', JSON.stringify(answerList))
     // window.location.href = `http://127.0.0.1:5500/result.html`
@@ -57,9 +57,9 @@ function getData() {
     return new Promise((resolve) => {
         const xhr = new XMLHttpRequest()
         // 准备请求参数
-        xhr.open('GET', 'https://mock.mengxuegu.com/mock/6767738f98077b17fe6792e2/question-naire', true)
+        xhr.open('GET', 'https://mock.mengxuegu.com/mock/6767738f98077b17fe6792e2/question-naire', true);
         // 发送请求
-        xhr.send()
+        xhr.send();
         // 监听请求的不同状态
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200){
@@ -88,10 +88,10 @@ function showQuestion(arr, current) {
     const num = document.getElementById('num');
     num.innerText = current;
     
-    console.log(arr[0]);;
+    console.log(arr[0]);
 
     // 修改问题
-    const questionTitle = document.querySelector('.question-title')
+    const questionTitle = document.querySelector('.question-title');
     questionTitle.innerText = arr[current - 1].topic_name;
 
     // 设置答案
