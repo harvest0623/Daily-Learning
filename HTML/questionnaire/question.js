@@ -41,8 +41,8 @@ next.addEventListener('click', () => {
 // 点提交
 goResult.addEventListener('click', () => {
     if (selectId == null) { // 最后一题没选答案
-      alert('答案不能为空');
-      return;
+        alert('答案不能为空');
+        return;
     }
     // 弹出得分
     // 1.遍历整个题目数据
@@ -99,13 +99,13 @@ function showQuestion(arr, current) {
 
     let lis = '';
     for (let i = 0; i < topic_answer.length; i++) {
-      const li = `
-        <li onClick="selectItem(${topic_answer[i].topic_answer_id})">
-          <input type="radio" name="item" id="item${topic_answer[i].topic_answer_id}">
-          <label for="item${topic_answer[i].topic_answer_id}">${topic_answer[i].answer_name}</label>
-        </li>
-      `
-      lis = lis + li;
+        const li = `
+            <li onClick="selectItem(${topic_answer[i].topic_answer_id})">
+            <input type="radio" name="item" id="item${topic_answer[i].topic_answer_id}">
+            <label for="item${topic_answer[i].topic_answer_id}">${topic_answer[i].answer_name}</label>
+            </li>
+        `;
+        lis = lis + li;
     }
     list.innerHTML = lis;
 }
