@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.result-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+.score-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+.score-value {
+    font-size: 48px;
+    font-weight: bold;
+    color: #15B8A6;
+    margin-bottom: 20px;
+}
+.score-desc {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+.restart-btn {
+    background-color: #15B8A6;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.restart-btn:hover {
+    background-color: #12a090;
+}
+.restart-btn:active {
+    transform: scale(0.98);
+}

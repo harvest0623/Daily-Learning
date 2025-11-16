@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷结果</title>
+    <link rel="stylesheet" href="./result.css">
+</head>
+<body>
+    <div class="result-container">
+        <div class="score-title">得分：</div>
+        <div class="score-value" id="scoreDisplay">95分</div>
+        <div class="score-desc" id="scoreDescription">你真是个小天才！</div>
+        <button class="restart-btn" onclick="restartQuiz()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+            </svg>
+            再来一次
+        </button>
+    </div>
+    
+    <script>
+        // 获取并显示得分信息
+        window.onload = function() {
+            // 从localStorage获取得分数据
+            const score = localStorage.getItem('score') || '95';
+            const correctCount = localStorage.getItem('correctCount') || '5';
+            const totalQuestions = localStorage.getItem('totalQuestions') || '5';
+            
+            // 更新DOM显示
+            document.getElementById('scoreDisplay').textContent = score + '分';
+            
+            // 根据得分设置不同的评价
+            let description = '';
+            const scoreNum = parseInt(score);
+            if (scoreNum >= 90) {
+                description = '你真是个小天才！';
+            } else if (scoreNum >= 80) {
+                description = '很棒！继续保持！';
+            } else if (scoreNum >= 70) {
+                description = '表现不错，再接再厉！';
+            } else if (scoreNum >= 60) {
+                description = '及格啦，再加把劲！';
+            } else {
+                description = '别灰心，再试一次吧！';
+            }
+            
+            document.getElementById('scoreDescription').textContent = description;
+        };
+        
+        // 再来一次按钮功能
+        function restartQuiz() {
+            // 清空localStorage中的答案记录
+            localStorage.removeItem('answerList');
+            localStorage.removeItem('correctCount');
+            localStorage.removeItem('totalQuestions');
+            localStorage.removeItem('score');
+            
+            // 跳转到问卷页面
+            window.location.href = 'question.html';
+        }
+    </script>
+</body>
+</html>
