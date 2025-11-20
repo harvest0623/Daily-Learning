@@ -12,6 +12,5 @@
 Array.prototype.abc = function(){
     return 'abc';
 }
-
 const arr = [];
 console.log(arr.abc());

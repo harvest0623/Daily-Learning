@@ -17,6 +17,6 @@ function Child() {
     this.age = 18;
 }
 const c = new Child(); // {age: 18}.__proto__ = Child.prototype
-// console.log(c.card);
-// c.house();
+console.log(c.card);
+c.house();
 console.log(c.toString());

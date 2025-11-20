@@ -2,10 +2,10 @@ function bar() {
     console.log(myName);
 }
 function foo() {
-    var myName = '小君';
+    var myName = 'henry';
     bar();
 }
-var myName = '冯总';
+var myName = 'harvest';
 foo();
 
 function test() {
