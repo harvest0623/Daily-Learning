@@ -4,7 +4,6 @@
 // }
 // getGood();
 
-
 // var wallet = "全局钱包(100块)"; 
 // function myHome() {
 //     var wallet = "卧室钱包(2000块)"; // 卧室里的钱包，只在卧室有效
