@@ -6,4 +6,4 @@
 
 const str = 'hello world';
 const newStr = str.slice(6, -1);
-console.log(newStr);
+console.log(newStr); 
