@@ -3,7 +3,6 @@
 // const newArr = arr.slice(0, 3);
 // console.log(arr);
 // console.log(newArr);
-
 const str = 'hello world';
 const newStr = str.slice(6, -1);
 console.log(newStr); 
