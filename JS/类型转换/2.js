@@ -1,0 +1,11 @@
+let num = 1;
+let str = 'hello';
+let flag = true;
+// console.log(String(num), num);
+// console.log(Number(str), str);
+// console.log(Number(flag));
+// console.log(String(flag));
+// console.log(Boolean(num));
+// console.log(Boolean(str));
+// console.log(Number(str));
+console.log(Number(undefined));
