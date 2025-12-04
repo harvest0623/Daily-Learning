@@ -3,8 +3,8 @@
 // arr[4].age = 20;
 // console.log(arr2);
 
+// const b = [3, 4];
 // const a = [1, 2, {age: 18}];
-// // const b = [3, 4];
 // let c = [...a];
 // a[2].age = 19;
 // console.log(c);
