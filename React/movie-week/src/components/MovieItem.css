@@ -1,0 +1,66 @@
+.itme{
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+.index{
+    width: 44px;
+    height: 23px;
+    text-align: center;
+    line-height: 23px;
+    font-size: 14px;
+    background-color: #ef698f;
+    color: #fff;
+    border-radius: 4px;
+}
+.info{
+    display: flex;
+    margin: 8px 0 10px 0;
+}
+.pic{
+    flex: 0 0 80px;
+    height: 134px;
+    overflow: hidden;
+}
+.pic img{
+    width: 100%;
+}
+.message{
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.name{
+    font-size: 18px;
+    font-weight: 600;
+}
+.score{
+    font-size: 10px;
+    color: #999;
+}
+.msg{
+    color: #999;
+    font-size: 14px;
+}
+.have-see{
+    flex: 0 0 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(225, 203, 78);
+}
+
+.desc{
+    font-size: 14px;
+    color: #999;
+    padding: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
