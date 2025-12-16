@@ -10,7 +10,7 @@ export default function App() {
     })
     function add() {
         setCount(count + 1);
-        // console.log(count);  // 0
+        console.log(count);  // 0
         setList(() => {
             list.push('html');
             return list;
@@ -27,7 +27,7 @@ export default function App() {
                 })
             }
         </ul>
-        <h3>{name}</h3>
+            <h3>{name}</h3>
         </div>
     )
 }
