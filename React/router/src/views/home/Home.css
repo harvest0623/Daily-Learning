@@ -1,0 +1,33 @@
+.home{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+    box-shadow: 0 1px 5px #aaa;
+}
+.body{
+    flex: 1;
+    display: flex;
+}
+.aside{
+    width: 200px;
+    padding: 30px;
+    box-sizing: border-box;
+    border-right: 1px solid #aaa;
+}
+.aside ul li{
+    list-style: none;
+    font-size: 20px;
+    padding: 10px 10px;
+    background-color: #c2b2b2;
+    margin-bottom: 20px;
+}
+.content{
+    flex: 1;
+}
