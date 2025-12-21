@@ -27,4 +27,3 @@ export default function State() {
         <div onClick={add}>{num}</div>
     )
 }
-
