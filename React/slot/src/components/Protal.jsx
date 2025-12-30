@@ -21,6 +21,5 @@ export default function Protal(pros) {
         const parentElement = getAttach(attach);
         parentElement?.appendChild?.(container);
     })
-
     return createPortal(children, getAttach(attach));
 }
