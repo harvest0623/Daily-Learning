@@ -1,19 +1,27 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import './styles/App.less'
 import './styles/Login.less'
 import './styles/Register.less'
+import './styles/Layout.less'
 import { useState } from 'react'
 import Home from './pages/Home'
-import './styles/Layout.less'
 import Layout from './pages/Layout'
 import AIPage from './pages/AIPage'
 import MinePage from './pages/MinePage'
 
 // 登录注册页面组件
 const AuthPage = () => {
-    const [activeTab, setActiveTab] = useState('register');
+    const [activeTab, setActiveTab] = useState('login');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+
+    const changeActiveTab = (tab, { phone, password }) => {
+        setActiveTab(tab)
+        setPhone(phone)
+        setPassword(password)
+    }
     return (
         <div className="app-root">
             <div className="cartoon-bg"></div>
@@ -35,7 +43,7 @@ const AuthPage = () => {
 
                     {/* 登录模块 */}
                     {
-                        activeTab === 'login'? (<Login></Login>) : (<Register></Register>)
+                        activeTab === 'login' ? (<Login user={{ phone, password }}></Login>) : (<Register changeActiveTab={changeActiveTab}></Register>)
                     }
 
                     <div className="social-login">
@@ -75,7 +83,14 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/login' element={<AuthPage />}></Route>
-                <Route path='/' element={<Home />}></Route>
+                <Route path='/' element={<Layout />}>
+                    {/* 从定向 */}
+                    <Route path='' element={<Navigate to='/home' />}></Route>
+                    <Route path='/home' element={<Home />}></Route>
+                    <Route path='/ai' element={<AIPage />}></Route>
+                    <Route path='/mine' element={<MinePage />}></Route>
+
+                </Route>
             </Routes>
         </BrowserRouter>
     )

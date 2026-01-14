@@ -8,9 +8,9 @@ export default function Layout() {
 
     const tabs = [
         { id: 'home', path: '/home', name: '首页', icon: 'icon-shouye', },
-        { id: 'ai', path: '/ai', name: 'AI小伙伴', icon: 'icon-bot', isHightLighted: true },
-        { id: 'mine', path: '/mine', name: '我的', icon: 'icon-wode' }
-    ]
+        { id: 'ai', path: '/ai', name: 'AI小伙伴', icon: 'icon-Al-Chatbot', isHightLighted: true },
+        { id: 'mine', path: '/mine', name: '我的', icon: 'icon-wode-copy' }
+    ];
 
     return (
         <div className='layout'>
@@ -26,8 +26,8 @@ export default function Layout() {
                             key={tab.id}
                             className={`bottom-nav__item ${tab.isHightLighted ? 'hightLighted' : ''} ${activeTab === tab.id ? 'active' : ''}`}
                             onClick={() => {
-                                setActiveTab(tab.id);
-                                navigate(tab.path);
+                                setActiveTab(tab.id)
+                                navigate(tab.path)
                             }}
                         >
                             <div className="bottom-nav__icon-container">

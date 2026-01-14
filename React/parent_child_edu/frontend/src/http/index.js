@@ -27,26 +27,21 @@ axios.interceptors.response.use(
         }
         return response
     },
-    (error) => { // 程序性错误
-        if (error.response) {
+    (res) => { // 程序性错误
+        if (res.status !== 200) {
             Toast.show({
                 icon: 'fail',
-                content: error.response.data.message || '请求失败'
+                content: res.response.data.message
             })
 
-            if (error.response.status == 416) { // 没有权限
+            if (res.status == 416) { // 没有权限
                 // 重定向去登录页面
                 setTimeout(() => {
                     window.location.href = '/login'
                 }, 2000)
             }
-        } else {
-            Toast.show({
-                icon: 'fail',
-                content: error.message || '网络错误'
-            })
+            return Promise.reject(res);
         }
-        return Promise.reject(error);
     }
 )
 
