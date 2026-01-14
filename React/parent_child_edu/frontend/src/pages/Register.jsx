@@ -3,7 +3,7 @@ import '../styles/register.less'
 import axios from '../http'
 import { Toast } from 'antd-mobile'
 
-export default function Register() {
+export default function Register({ changeActiveTab }) {
     const [nickname, setNickname] = useState('');
     const [phone, setPhone] = useState('');
     const [captchaCode, setCaptchaCode] = useState('');
@@ -11,20 +11,19 @@ export default function Register() {
     const [captchaId, setCaptchaId] = useState('');
     const [captchaSvg, setCaptchaSvg] = useState('');
     const [loading, setLoading] = useState(false);
-
+    
     async function loadCaptcha() {
         const res = await axios.get('/api/auth/captcha');
-        // console.log(res);
         setCaptchaId(res.data.captchaId);
         setCaptchaSvg(res.data.captchaSvg);
     }
 
     useEffect(() => {
-        loadCaptcha()
+        loadCaptcha();
     }, [])
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         if (!nickname || !phone || !captchaCode || !password) {
             Toast.show({
                 content: '请输入完整信息',
@@ -48,18 +47,24 @@ export default function Register() {
         setLoading(true);
 
         // 发请求
-        const res = axios.post('/api/auth/register', {
+        const res = await axios.post('/api/auth/register', {
             nickname,
             phone,
             captchaCode,
             password,
             captchaId
         })
-        console.log(res);
+        // console.log(res);
+        Toast.show({
+            content: res.data.message,
+            icon: 'success'
+        })
+
+        changeActiveTab('login', { phone, password });
     }
     return (
         <div>
-            <form className='register-form' onSubmit={() => { }}>
+            <form className='register-form' onSubmit={handleSubmit}>
                 <div className="register-form__group">
                     <i className='iconfont icon-zhanghao'></i>
                     <input

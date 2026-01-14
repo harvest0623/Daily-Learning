@@ -6,6 +6,10 @@ import './styles/Login.less'
 import './styles/Register.less'
 import { useState } from 'react'
 import Home from './pages/Home'
+import './styles/Layout.less'
+import Layout from './pages/Layout'
+import AIPage from './pages/AIPage'
+import MinePage from './pages/MinePage'
 
 // 登录注册页面组件
 const AuthPage = () => {

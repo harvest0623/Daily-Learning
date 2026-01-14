@@ -4,11 +4,11 @@ import { Toast } from 'antd-mobile'
 import axios from '../http'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
-    const navigate = useNavigate();
+export default function Login({ user }) {
     const [loading, setLoading] = useState(false);
-    const [phone, setPhone] = useState('18679460523');
-    const [password, setPassword] = useState('123');
+    const [phone, setPhone] = useState(() => user.phone || '');
+    const [password, setPassword] = useState(() => user.password || '');
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault(); // 阻止表单默认提交行为
 
@@ -34,7 +34,7 @@ export default function Login() {
         //         password
         //     })
         // })
-        const res = await axios.post('http://localhost:3000/api/auth/login', {
+        const res = await axios.post('api/auth/login', {
             phone,
             password
         })
@@ -71,32 +71,34 @@ export default function Login() {
         <div>
             <form className='auth-form' onSubmit={handleSubmit}>
                 <div className="auth-form__group">
-                    <i className="iconfont icon-zhanghao"></i>
-                    <input type="tel" placeholder="请输入手机号或邮箱"
-                        className="auth-form__input"
+                    <i className='iconfont icon-zhanghao'></i>
+                    <input
+                        type="tel"
+                        placeholder='请输入手机号或邮箱'
+                        className='auth-form__input'
                         value={phone}
                         onChange={(e) => {
-                            setPhone(e.target.value);
-                        }} 
-                    />
-                </div>
-
-                <div className="auth-form__group">
-                    <i className="iconfont icon-mima"></i>
-                    <input type="password" placeholder="请输入密码"
-                        className="auth-form__input" 
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
+                            setPhone(e.target.value)
                         }}
                     />
                 </div>
-
+                <div className="auth-form__group">
+                    <i className='iconfont icon-mima'></i>
+                    <input
+                        type="password"
+                        placeholder='请输入密码'
+                        className='auth-form__input'
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                        }}
+                    />
+                </div>
                 <div className="auth-form__forgot-wrapper">
-                    <a href=" " className="auth-form__forgot">忘记密码？</a >
+                    <a href="#" className='auth-form__forgot'>忘记密码？</a>
                 </div>
 
-                <button disabled={loading} type="submit" className="auth-form__submit">
+                <button disabled={loading} type='submit' className='auth-form__submit'>
                     {loading ? '登录中...' : '登录'}
                 </button>
             </form>

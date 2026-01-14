@@ -14,7 +14,7 @@ function generateCaptcha() {
         color: true,
         background: '#f0f0f0'
     })
-    
+
     // 生成唯一 ID
     const captchaId = `captcha_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 
@@ -27,18 +27,38 @@ function generateCaptcha() {
 
     // 过期清理
     setTimeout(() => {
-        const stored = captchaStore.get(captchaId)
+        const stored = captchaStore.get(captchaId);
         if (stored) {
-            captchaStore.delete(captchaId)
+            captchaStore.delete(captchaId);
         }
     }, CAPTCHA_EXPIRE_TIME)
+
 
     return {
         id: captchaId,
         svg: captcha.data
     }
+
+}
+
+function verifyCaptcha(captchaId, captchaCode) {
+    const stored = captchaStore.get(captchaId);
+    if (!stored) {
+        return { valid: false, message: '验证码已过期' };
+    }
+
+    if (stored.text !== captchaCode.toLocaleLowerCase().trim()) {
+        return { valid: false, message: '验证码错误' };
+    }
+
+    captchaStore.delete(captchaId);
+    return { 
+        valid: true,
+        message: '验证码验证成功' 
+    };
 }
 
 module.exports = {
-    generateCaptcha
+    generateCaptcha,
+    verifyCaptcha
 }
