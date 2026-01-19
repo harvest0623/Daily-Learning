@@ -3,11 +3,11 @@ const axios = require('axios');
 async function recognition(ctx) {
     const { img } = ctx.request.body;
     // 向工作流发请求
-    const params = { image: img };
+    const params = { image_base64: img }
     try {
         const res = await axios({
             method: 'post',
-            url: 'https://dw66x8rp6x.coze.site/run',
+            url: 'https://z2sjhbyckh.coze.site/run',
             headers: {
                 'Authorization': `Bearer ${process.env.VITE_COZE_IMAGE_TO_TEXT_AND_VOICE}`,
                 'Content-Type': 'application/json'

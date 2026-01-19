@@ -2,6 +2,7 @@ import './Index.less'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Index({ recognitionResult }) {
+    // console.log(recognitionResult);
     const data = recognitionResult?.data || {};
     const audioElement = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -33,14 +34,14 @@ export default function Index({ recognitionResult }) {
                     <div className="object-recognition-result__content">
                         <div className='object-recognition-result__description'>
                             <h4>物品介绍</h4>
-                            <p>{data?.description || '暂无介绍'}</p>
+                            <p>{data?.image_description || '暂无介绍'}</p>
                         </div>
                         <div className='object-recognition-result__safety'>
                             <h4>安全提示</h4>
-                            <p>{data?.safety || '暂无安全提示'}</p>
+                            <p>暂无安全提示</p>
                         </div>
                     </div>
-                    <audio src={data?.audio_file?.url || null} ref={audioElement}></audio>
+                    <audio src={data?.audio_url || null} ref={audioElement}></audio>
                 </div>
             )
         }

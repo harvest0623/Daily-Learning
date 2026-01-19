@@ -5,12 +5,14 @@ import './styles/App.less'
 import './styles/Login.less'
 import './styles/Register.less'
 import './styles/Layout.less'
+import './styles/AIPage.less'
 import { useState } from 'react'
 import Home from './pages/Home'
 import Layout from './pages/Layout'
 import AIPage from './pages/AIPage'
 import MinePage from './pages/MinePage'
 import Recognition from './pages/Recognition'
+
 
 // 登录注册页面组件
 const AuthPage = () => {
