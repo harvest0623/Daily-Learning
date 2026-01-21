@@ -16,8 +16,13 @@ export default function AccountSetting() {
     const [gender, setGender] = useState('');
     const [visible, setVisible] = useState(false);
     const [visibleImage, setVisibleImage] = useState(false);
-    const [previewAvatar, setPreviewAvatar] = useState('')
-    const [visiblePopup, setVisiblePopup] = useState(false)
+    const [previewAvatar, setPreviewAvatar] = useState('');
+    const [visiblePopup, setVisiblePopup] = useState(false);
+    const [newNickname, setNewNickname] = useState('');
+    const [visiblePopupPassword, setVisiblePopupPassword] = useState(false);
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const fileInputRef = useRef(null);
 
     const handleAvatarChange = (e) => {
@@ -66,15 +71,51 @@ export default function AccountSetting() {
         }
     }
 
+    const updateNickname = async () => {
+        const res = await axios.post('/api/auth/updateNickname', {
+            nickname: newNickname
+        });
+        // console.log(res);
+        Toast.show({
+            content: res.data.message,
+            duration: 1000,
+            icon: 'success',
+            afterClose: () => {
+                setVisiblePopup(false);
+                setNickname(newNickname);
+            }   
+        })
+    }
+
+    const updatePassword = async () => {
+        const res = await axios.post('/api/auth/updatePassword', {
+            oldPassword,
+            newPassword
+        });
+        // console.log(res);
+        Toast.show({
+            content: res.data.message,
+            duration: 1000,
+            icon: 'success',
+            afterClose: () => {
+                setVisiblePopupPassword(false);
+                setOldPassword('');
+                setNewPassword('');
+                setConfirmPassword('');
+            }   
+        })
+    }
+
     useEffect(() => {
         // 从后端获取用户信息
         axios.get('api/auth/info')
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 setAvatar(res.data.avatar);
                 setNickname(res.data.nickname);
+                setNewNickname(res.data.nickname);
                 setAccount(res.data.phone);
-                setGender(res.data.gender === '男' ? '男' : '女');
+                setGender(res.data.gender === 1 ? '男' : '女');
             })
     }, []);
 
@@ -104,7 +145,7 @@ export default function AccountSetting() {
                     <List.Item extra={account} clickable>
                         账号
                     </List.Item>
-                    <List.Item extra='修改密码' clickable>
+                    <List.Item extra='修改密码' clickable onClick={() => setVisiblePopupPassword(true)}>
                         密码
                     </List.Item>
                 </List>
@@ -149,10 +190,12 @@ export default function AccountSetting() {
                 )}
             />
 
+            {/* 修改昵称的弹窗 */}
             <Popup
                 visible={visiblePopup}
                 showCloseButton
                 onClose={() => setVisiblePopup(false)}
+                afterShow={() => setNewNickname(nickname)}
                 position='right'
             >
                 <div className="update-nickname">
@@ -160,12 +203,48 @@ export default function AccountSetting() {
                     <div className="update-nickname__input-container">
                         <Input
                             placeholder="请输入新昵称"
-                            value={nickname}
-                            onChange={(val) => setNickname(val)}
+                            value={newNickname}
+                            onChange={(val) => setNewNickname(val)}
                         />
                     </div>
                 </div>
-                <Button type='primary' block className='update-nickname__confirm'>确认</Button>
+                <Button type='primary' block className='update-nickname__confirm' onClick={updateNickname}>确认</Button>
+            </Popup>
+
+            {/* 修改密码的弹窗 */}
+            <Popup
+                visible={visiblePopupPassword}
+                showCloseButton
+                onClose={() => setVisiblePopupPassword(false)}
+                position='right'
+            >
+                <div className="update-password">
+                    <div className="update-password__title">旧密码：</div>
+                    <div className="update-password__input-container">
+                        <Input
+                            placeholder="请输入旧密码"
+                            value={oldPassword}
+                            onChange={(val) => setOldPassword(val)}
+                        />
+                    </div>
+                    <div className="update-password__title">新密码：</div>
+                    <div className="update-password__input-container">
+                        <Input
+                            placeholder="请输入新密码"
+                            value={newPassword}
+                            onChange={(val) => setNewPassword(val)}
+                        />
+                    </div>
+                    {/* <div className="update-password__title">请确认新密码：</div>
+                    <div className="update-password__input-container">
+                        <Input
+                            placeholder="请确认新密码"
+                            value={confirmPassword}
+                            onChange={(val) => setConfirmPassword(val)} 
+                        />
+                    </div> */}
+                </div>
+                <Button type='primary' block className='update-password__confirm' onClick={updatePassword}>确认</Button>
             </Popup>
         </div>
     )

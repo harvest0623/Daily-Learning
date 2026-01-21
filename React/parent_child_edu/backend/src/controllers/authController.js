@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { findUserByPhone, createUser, findUserById, updateUserInfo } = require('../models/userModel.js');
 const { generateCaptcha, verifyCaptcha } = require('../utils/captcha.js');
 
-
+// 登录
 async function login(ctx) {
     // 解析请求体中的账号密码
     const { phone, password } = ctx.request.body;
@@ -144,7 +144,7 @@ async function getUserInfo(ctx) {
             phone: res.phone,
             nickname: res.nickname,
             avatar: res.avatar,
-            gender: res.gender === '男' ? '男' : '女'
+            gender: res.gender
         }
         ctx.body = data;
     } catch (error) {
@@ -184,10 +184,58 @@ async function updateUser(ctx) {
     }
 }
 
+// 更新用户密码
+async function updatePassword(ctx) {
+    const id = ctx.userId;
+    const { oldPassword, newPassword } = ctx.request.body;
+    if (!oldPassword || !newPassword) {
+        ctx.status = 400;
+        ctx.body = {
+            message: '旧密码和新密码都不能为空',
+            code: 0
+        }
+        return;
+    }
+    try {
+        const user = await findUserById(id);
+        const ok = await bcrypt.compare(oldPassword, user.password_hash);
+        if (!ok) {
+            ctx.status = 400;
+            ctx.body = {
+                message: '旧密码错误',
+                code: 0
+            }
+            return;
+        }
+        const passwordHash = await bcrypt.hash(newPassword, 10);
+        const res = await updateUserInfo({ password_hash: passwordHash }, id);
+        // console.log(res);
+        if (res.affectedRows) {
+            ctx.body = {
+                message: '修改成功',
+                code: 1
+            }
+        } else {
+            ctx.status = 400;
+            ctx.body = {
+                message: '修改失败',
+                code: 0
+            }
+        }
+    } catch (error) {
+        ctx.status = 500;
+        ctx.body = {
+            message: error.message,
+            code: 0
+        }
+    }
+}
+
 module.exports = {
     login,
     getCaptcha,
     register,
     getUserInfo,
-    updateUser
+    updateUser,
+    updatePassword
 }
