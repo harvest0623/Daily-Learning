@@ -13,6 +13,7 @@ import AIPage from './pages/AIPage'
 import MinePage from './pages/MinePage'
 import Recognition from './pages/Recognition'
 import AccountSetting from './pages/AccountSetting'
+import AiChat from './pages/AiChat'
 
 
 // 登录注册页面组件
@@ -98,6 +99,8 @@ export default function App() {
                 </Route>
                 
                 <Route path='/AccountSetting' element={<AccountSetting/>}></Route>
+                <Route path='/ai-chat' element={<AiChat/>}></Route>
+
             </Routes>
         </BrowserRouter>
     )
