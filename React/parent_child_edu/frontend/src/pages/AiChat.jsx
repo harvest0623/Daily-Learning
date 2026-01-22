@@ -9,10 +9,10 @@ class HandleMessages {
         this.messages = [];
     }
     createMessage = (id, role, content, timestamp) => {
-        return { id, role, content, timestamp: timestamp.toLocaleString() };
+        return { id, role, content, timestamp };
     }
     initMessages = () => {
-        this.messages.push(this.createMessage(Date.now(), 'ai', '你好，我是智能对话助手，有什么我可以帮助你的吗？', new Date()));
+        this.messages.push(this.createMessage(Date.now(), 'ai', '你好，我是智能对话助手，有什么我可以帮助你的吗？', new Date().toLocaleString()));
     }
     addMessage = (message) => {
         this.messages.push(message);
@@ -42,7 +42,7 @@ export default function AiChat() {
         // 显示用户输入的内容
 
         
-        const userMessage = msg.current.createMessage(Date.now(), 'user', content, new Date());
+        const userMessage = msg.current.createMessage(Date.now(), 'user', content, new Date().toLocaleString());
 
        
         msg.current.addMessage(userMessage);
@@ -88,7 +88,7 @@ export default function AiChat() {
                             <div className={`ai-dialogue-message ${message.role === 'user' ? 'user-message' : 'ai-message'}`} key={message.id}>
                                 <div className="ai-dialogue-message__content">
                                     <div className="ai-dialogue-message__text">{message.content}</div>
-                                    <div className="ai-dialogue-message__time">{message.timestamp}</div>
+                                    <div className="ai-dialogue-message__time">{message.timestamp.toLocaleString()}</div>
                                 </div>
                             </div>
                         ))
