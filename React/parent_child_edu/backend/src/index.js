@@ -4,6 +4,7 @@ const cors = require('@koa/cors');
 const bodyParser = require('koa-bodyparser');
 const authRoutes = require('./routes/authRoutes.js');
 const cozeRoutes = require('./routes/coze-api.js');
+const deepseekRoutes = require('./routes/deepseek-api.js');
 const dotenv = require('dotenv');
 
 dotenv.config({
@@ -33,6 +34,7 @@ app
     .use(router.routes(), router.allowedMethods())
     .use(authRoutes.routes(), authRoutes.allowedMethods())
     .use(cozeRoutes.routes(), cozeRoutes.allowedMethods())
+    .use(deepseekRoutes.routes(), deepseekRoutes.allowedMethods())
 
 app.listen(3000, () => {
     console.log('server is running on port 3000');
