@@ -22,5 +22,5 @@ export function createATA(onDownloadFile: (code: string, path: string) => void) 
             },
         },
     })
-    return ata
+    return ata;
 };

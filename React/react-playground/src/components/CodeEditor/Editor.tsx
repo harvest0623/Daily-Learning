@@ -2,7 +2,7 @@ import MonacoEditor from '@monaco-editor/react'
 import type { EditorProps, OnMount } from '@monaco-editor/react'
 import { createATA } from './Editor/ata.ts'
 
-interface EditorFile {
+export interface EditorFile {
     name: string
     value: string
     language: string
@@ -11,27 +11,26 @@ interface EditorFile {
 interface Props {
     file: EditorFile
     onChange?: EditorProps['onChange'],
-    options?: EditorProps['options']
+    options?: EditorProps['options'],
 }
 
 export default function Editor(props: Props) {
-    const { file, onChange, options } = props
+    const { file, onChange, options } = props;
 
     // const code = `
     // import './App.scss'
     // import lodash from 'lodash'
 
     // export default function App() {
-    //     return (
-    //         <div>Hello World</div>
-    //     )
-    // }
-    // `
+    //   return (
+    //     <div>Hello World</div>
+    //   )
+    // }`
 
     // 编辑器加载完毕执行的回调
     const handleEditorMount: OnMount = (editor, monaco) => {
         editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_M, () => {
-            editor.getAction('editor.action.formatDocument')?.run()
+            editor.getAction('editor.action.formatDocument')?.run();
         })
 
         // 兼容处理 jsx
@@ -42,7 +41,7 @@ export default function Editor(props: Props) {
 
         // 类型提示
         const ata = createATA((code, path) => {
-            monaco.languages.typescript.typescriptDefaults.addExtraLib(code, `file://${path}`)
+            monaco.languages.typescript.typescriptDefaults.addExtraLib(code, `file://${path}`);
         })
 
         // 监听编辑器内容变化，更新类型提示
@@ -67,10 +66,10 @@ export default function Editor(props: Props) {
                 fontSize: 14,
                 scrollBeyondLastLine: false,
                 scrollbar: {
-                    verticalScrollbarSize: 4,
-                    horizontalScrollbarSize: 4
+                    verticalScrollbarSize: 6,
+                    horizontalScrollbarSize: 6,
                 },
-                ...options
+                ...options,
             }}
         />
     )
