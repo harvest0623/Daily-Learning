@@ -1,0 +1,42 @@
+.tabs {
+    display: flex;
+    align-items: center;
+    height: 38px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    color: #444;
+    background-color: #fff;
+
+    .tab-item {
+        display: inline-flex;
+        padding: 8px 10px 6px;
+        font-size: 13px;
+        line-height: 20px;
+        cursor: pointer;
+        align-items: center;
+        border-bottom: 3px solid transparent;
+
+        &.actived {
+            color: skyblue;
+            border-bottom: 3px solid skyblue;
+        }
+
+        &:first-child {
+            cursor: text;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        height: 1px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+    }
+}
