@@ -1,6 +1,6 @@
-# 🌟 Daily-Learning
+# 🌟 Daily Learning
 
-> 一份系统化的前端与全栈学习实践库，记录从基础到进阶的技术成长轨迹。
+> 一份系统化的前端与AI全栈学习实践库，记录从基础到进阶的技术成长轨迹。
 
 ## 📚项目简介
 
@@ -66,9 +66,12 @@ npm start
 4.  推送到分支 (`git push origin feature/AmazingFeature`)
 5.  打开一个 `Pull Request`
 
+## 📄 许可证
+本项目采用 MIT 许可证，详见 [LICENSE](https://github.com/harvest0623/Daily-Learning/blob/main/LICENSE) 文件。
+
 * * *
 
 ## 💬 联系我
 
 -   GitHub Issues: [提交问题](https://github.com/harvest0623/Daily-Learning/issues)
--   邮箱：3367741939@qq.com  or harvest060523@gmail.com
+-   邮箱：<3367741939@qq.com> or <harvest060523@gmail.com>
