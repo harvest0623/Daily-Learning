@@ -1,0 +1,86 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        .two {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+
+        .three {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="one">
+        <div class="two">
+            <div class="three"></div>
+        </div>
+    </div>
+    <script>
+        const one = document.querySelector('.one');
+        const two = document.querySelector('.two');
+        const three = document.querySelector('.three');
+
+        one.addEventListener('click', function () {
+            console.log('one');
+        })
+        two.addEventListener('click', function () {
+            console.log('two');
+        })
+        three.addEventListener('click', function (e) {
+            console.log('three');
+            e.stopPropagation()  // 阻止事件冒泡
+        })
+
+        // function handle() {
+        //   console.log('three');
+        // }
+    </script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+    <script>
+        // const lis = document.querySelectorAll('li');
+        // // console.log(lis);
+        // lis.forEach((li, i, arr) => {
+        //     li.addEventListener('click', function () {
+        //         console.log(this.innerText);
+        //     })
+        // })
+
+        const ul = document.querySelector('ul');
+        ul.addEventListener('click', function (e) {
+            console.log(e.target.innerText);
+        })
+    </script>
+</body>
+</html> -->
