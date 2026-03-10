@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>一级页面</h1>
+    <iframe src="https://www.baidu.com" width="500" height="500" frameborder="0"></iframe>
+
+    <script>
+        document.domain = 'www.baidu.com';
+        document.querySelector('iframe').onload = function () {
+            console.log(this.contentWindow.data);
+        }
+    </script>
+</body>
+</html>

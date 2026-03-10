@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myWebSocket(url, params) {
+            return new Promise((resolve, reject) => {
+                // 例子
+                // const xhr = new XMLHttpRequest();
+                // xhr.open('GET', url, true);
+                // xhr.setRequestHeader('Content-Type', 'application/json');
+                // xhr.send(JSON.stringify(params));
+
+                const socket = new WebSocket(url);
+                socket.onopen = function() {  // 连接成功
+                    console.log('连接成功');
+                    socket.send(JSON.stringify(params)); // 发送参数
+                }
+                socket.onmessage = function(event) {  // 收到消息
+                    console.log('收到消息', event.data);
+                    resolve(event.data); // 解析数据
+                }
+            })
+        }
+        myWebSocket = new WebSocket('ws://localhost:3000', {age:18});
+    </script>
+</body>
+</html>
