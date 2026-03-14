@@ -5,9 +5,9 @@ function toThousand(num) {
     let str = num.toString();
     let [int, decimal] = str.split('.');
     let result = '';
-    for(let i = int.length - 1, count = 1; i >= 0; i--, count++) {
+    for (let i = int.length - 1, count = 1; i >= 0; i--, count++) {
         result = int[i] + result;
-        if(count % 3 === 0 && i !== 0) {
+        if (count % 3 === 0 && i !== 0) {
             result = ',' + result;
         }
     }
@@ -15,3 +15,22 @@ function toThousand(num) {
 
 }
 console.log(toThousand(num));
+
+
+// function toThousand(num) {
+//     num = num.toFixed(2);
+//     const [integer, decimal] = String.prototype.split.call(num, '.');
+//     const res = [];
+//     let len = 0;    
+
+//     for (let i = integer.length - 1; i >= 0; i--) {
+//         res.unshift(integer[i]);
+//         len++;
+//         if (len % 3 === 0 && i !== 0) {
+//             res.unshift(',');
+//         }
+//     }
+//     const str = res.join('') + '.' + decimal;
+//     return str;
+// }
+// console.log(toThousand(num));

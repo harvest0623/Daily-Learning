@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list"></ul>
+
+    <script>
+        const data = new Array(10000).fill(0).map((item, index) => ({
+            id: index,
+            name: `name${index}`
+        }));
+
+        const start = Date.now();
+        for (let i = 0; i < data.length; i++) {
+            const item = data[i];
+            const li = document.createElement('li');
+            li.innerHTML = item.name;
+            document.getElementById('list').appendChild(li);
+        }
+        const end = Date.now();
+        console.log(`js执行耗时：${end - start}ms`);
+
+        setTimeout(() => {
+            console.log(`页面渲染耗时：${Date.now() - end}ms`);
+        }, 0)
+    </script>
+</body>
+</html>

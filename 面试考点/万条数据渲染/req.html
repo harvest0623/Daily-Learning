@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list"></ul>
+
+    <script>
+        const data = new Array(10000).fill(0).map((item, index) => ({
+            id: index,
+            name: `name${index}`
+        }));
+
+        let total = data.length;
+        let once = 20;
+        let page = Math.ceil(total / once);
+        let index = 0;
+
+        function loop(curTotal) {
+            if (curTotal <= 0) return;
+
+            const pageCount = Math.min(curTotal, once);
+
+            requestAnimationFrame(() => {
+                for (let i = 0; i < pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.innerHTML = ~~(Math.random() * total);
+                    document.getElementById('list').appendChild(li);
+                }
+                loop(curTotal - pageCount);
+            })
+
+        }
+
+        loop(total);
+    </script>
+</body>
+</html>
