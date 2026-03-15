@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="input">
+    <button id="upload">上传</button>
+
+    <script>
+        const input = document.getElementById('input');
+        const upload = document.getElementById('upload');
+        let fileObj = null;
+
+        // 处理文件选择事件
+        function handleChange(e) {
+            // console.log(e.target.files);
+
+            const [file] = e.target.files;
+            fileObj = file;
+        }
+
+        // 处理上传事件
+        function handleUpload() {
+            if (!fileObj) {
+                alert('请选择文件');
+                return;
+            }
+
+            // 将 fileObj 进行切片
+            const chunkList = createChunk(fileObj);
+            // console.log(chunkList);
+
+            const chunks = chunkList.map((file, index) => {
+                return {
+                    file,
+                    size: file.size,
+                    chunkName: `${fileObj.name}-${index}`,
+                    fileName: fileObj.name,
+                    index
+                }
+            })
+            // console.log(chunks);
+
+            // 上传文件切片
+            uploadChunk(chunks);
+        }
+
+        // 将 input 中的文件资源切片
+        input.addEventListener('change', handleChange);
+
+        upload.addEventListener('click', handleUpload);
+
+        // 创建文件切片
+        function createChunk(file, size = 5 * 1024 * 1024) {
+            const chunkList = [];
+            let cur = 0;
+            while (cur < file.size) {
+                const end = Math.min(cur + size, file.size);
+                const chunk = file.slice(cur, end);
+                chunkList.push(chunk);
+                cur = end;
+            }
+            return chunkList;
+        }
+
+        // 上传文件切片
+        function uploadChunk(chunks) {
+            const formChunks = chunks.map(({ file, size, chunkName, fileName, index }) => {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('chunkName', chunkName);
+                formData.append('fileName', fileName);
+                return { formData, index };
+            })
+            // console.log(formChunks);
+
+            const requestList = formChunks.map(({ formData, index }) => {
+                return axios.post('http://localhost:3000/upload', formData);
+            })
+
+            Promise.all(requestList).then(res => {
+                axios.post('http://localhost:3000/merge', {
+                    fileName: fileObj.name,
+                    size: 5 * 1024 * 1024
+                }).then(res => {
+                    console.log(res.data);
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>
