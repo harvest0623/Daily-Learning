@@ -79,27 +79,128 @@ class MyPromise {
         return newPromise;
     }
 
+    catch(onRejected) {
+        return this.then(undefined, onRejected);
+    }
+
+    static race(promises) {
+        return new MyPromise((resolve, reject) => {
+            for (let promise of promises) {
+                promise.then(
+                    (res) => {
+                        resolve(res);
+                    },
+                    (err) => {
+                        reject(err);
+                    }
+                )
+            }
+        })
+    }
+
+    static all(promises) {
+        return new MyPromise((resolve, reject) => {
+            const arr = [];
+            for (let i = 0; i < promises.length; i++) {
+                const p = promises[i];
+                p.then(
+                    (res) => {
+                        arr[i] = res;
+                        if (promises.length === arr.length) {
+                            resolve(arr);
+                        }
+                    },
+                    (err) => reject(err)
+                )
+            }
+        })
+
+    }
+
+    static any(promises) {
+        return new MyPromise((resolve, reject) => {
+            let results = [];
+            for (let i = 0; i < promises.length; i++) {
+                const p = promises[i];
+                p.then(
+                    (res) => {
+                        resolve(res);
+                    },
+                    (err) => {
+                        results[i] = err;
+                        if (results.length == promises.length) {
+                            reject(results);
+                        }
+                    }
+                )
+            }
+        })
+    }
+
+    finally(callback) {
+        return this.then(
+            () => callback(),
+            () => callback()
+        );
+    }
+
+    static allSettled(promises) {
+        const promiseArray = Array.from(promises);
+        const result = [];
+        let count = 0;
+        return new Promise((resolve) => {
+            promiseArray.forEach((promise, index) => {
+                promise.then(
+                    (res) => {
+                        result[index] = { status: 'fulfilled', value: res }
+                    },
+                    (err) => {
+                        result[index] = { status: 'rejected', reason: err }
+                    }
+                ).finally(() => {
+                    count++;
+                    if (result.length === promises.length) {
+                        resolve(result);
+                    }
+                })
+            });
+        });
+    }
+
+    static resolve(val) {
+        return new MyPromise((resolve) => {
+            resolve(val);
+        })
+    }
 }
 
-const p = new MyPromise((resolve, reject) => {
-    // setTimeout(() => {
-    //     resolve('ok')
-    // }, 1000)
-    resolve('yes');
-})
+const foo = () => {
+    return new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+            reject('foo no');
+        }, 1000)
+    })
+}
+
 const bar = () => {
     return new MyPromise((resolve, reject) => {
         setTimeout(() => {
-            console.log('bar');
-            resolve('bar is ok');
-        }, 500);
+            reject('bar no');
+        }, 500)
     })
 }
-p
+
+const baz = () => {
+    return new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('baz');
+        }, 1500)
+    })
+}
+
+MyPromise.any([foo(), bar(), baz()])
     .then((res) => {
         console.log(res);
-        return bar();
-    })
-    .then((res2) => {
-        console.log(res2);
+    }, err => {
+        console.log(err);
     })
