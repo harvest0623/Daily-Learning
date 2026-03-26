@@ -37,7 +37,7 @@ class Limit {
 
     _run() {
         if (this.runningCount < this.parallCount && this.tasks.length) {
-            const [task, resolve, reject] = this.tasks.shift();
+            const { task, resolve, reject } = this.tasks.shift();
             this.runningCount++;
             task().then(resolve, reject).finally(() => {
                 this.runningCount--;
