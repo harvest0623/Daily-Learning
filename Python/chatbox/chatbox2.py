@@ -5,8 +5,10 @@ import streamlit as st  # 专门用来创建应用页面的库
 
 load_dotenv() # 从.env 文件中读取内容
 
+api_key = os.getenv('API_KEY') or st.secrets.get('API_KEY')
+
 client = OpenAI(
-    api_key=os.getenv('API_KEY'),
+    api_key=api_key,
     base_url="https://api.deepseek.com"
 )
 
