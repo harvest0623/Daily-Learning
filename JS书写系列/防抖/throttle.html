@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">提交</button>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.addEventListener('click', throttle(handle, 1000))
+
+        function handle(e) {
+            console.log('提交了', this, e);
+        }
+
+        function throttle(fn, delay) {
+            let preTime = Date.now()
+            return function (e) {  // foo
+                let curTime = Date.now()
+                if (curTime - preTime >= delay) {
+                    fn.call(this, e)
+                    preTime = curTime
+                }
+            }
+        }
+    </script>
+</body>
+</html>
