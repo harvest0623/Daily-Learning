@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 多模态聊天</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">🤖 AI Chat</h1>
+                <button class="btn-new-chat" id="btnNewChat">＋ 新对话</button>
+            </div>
+            <ul class="chat-list" id="chatList"></ul>
+        </aside>
+
+        <!-- 主区域 -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <button class="btn-toggle-sidebar" id="btnToggleSidebar">☰</button>
+                <h2 class="chat-title" id="chatTitle">新对话</h2>
+                <div class="chat-header-actions">
+                    <button class="btn-theme" id="btnToggleTheme" title="切换主题">🌙</button>
+                </div>
+            </header>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-icon">🤖</div>
+                    <h2>欢迎使用 AI 多模态聊天</h2>
+                    <p>支持文本和图片对话，由 Qwen3.6-27B 驱动</p>
+                    <div class="quick-prompts">
+                        <button class="quick-prompt" data-prompt="请用中文介绍一下你自己">👋 自我介绍</button>
+                        <button class="quick-prompt" data-prompt="解释一下什么是机器学习，用简单的例子说明">🧠 什么是机器学习？</button>
+                        <button class="quick-prompt" data-prompt="帮我写一个 Python 快速排序算法">💻 写一段代码</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="image-previews" id="imagePreviews"></div>
+                <div class="input-row">
+                    <button class="btn-upload" id="btnUpload" title="上传图片">🖼️</button>
+                    <input type="file" id="fileInput" accept="image/*" multiple hidden />
+                    <textarea class="chat-input" id="chatInput" placeholder="输入消息，Enter 发送，Shift+Enter 换行..."
+                        rows="1"></textarea>
+                    <button class="btn-send" id="btnSend" title="发送消息">➤</button>
+                </div>
+                <p class="input-hint">支持粘贴图片 | 由硅基流动 Qwen3.6-27B 驱动</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
