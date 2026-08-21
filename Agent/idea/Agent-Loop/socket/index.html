@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function mySocket(url, params) {
+            return new Promise((resolve, reject) => {
+                const socket = new WebSocket(url);  // 朝着url方向连接
+                socket.onopen = () => {
+                    console.log('连接成功');
+                    socket.send(JSON.stringify(params));  // 向后端发送params
+
+                    // let count = 19
+                    // setInterval(() => {
+                    //   socket.send(JSON.stringify({ age: count++ }))
+                    // }, 3000)
+
+                }
+                socket.onmessage = (msg) => {
+                    console.log('收到消息', msg);
+                    resolve(msg);
+                }
+            })
+        }
+        mySocket('ws://localhost:3000', { age: 18 });
+    </script>
+</body>
+
+</html>
